@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+    environment {
+        DIRECTORY_PATH = 'C:\\Users\\danie\\OneDrive\\Documents\\UNI\\SIT223 - Professional Practice\\Jenkins'
+        TESTING_ENVIRONMENT = 'Pipeline test'
+        PRODUCTION_ENVIRONMENT = 'Daniel Mattioli'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                echo "Build started and completed!"
+                echo "Directory Path: ${env.DIRECTORY_PATH}"
+                bat 'java -version'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Test started and completed!"
+                echo "Testing in: ${env.TESTING_ENVIRONMENT}"
+            }
+        }
+        stage('Code Quality Check') {
+            steps {
+                echo "Code Quality Check started and completed!"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo "Deployment started and completed!"
+            }
+        }
+        stage('Approval') {
+            steps {
+                echo "Approval process started and completed!"
+            }
+        }
+        stage('Deploy to Production') {
+            steps {
+                echo "Deploying to Production: ${env.PRODUCTION_ENVIRONMENT}"
+            }
+        }
+    }
+}
