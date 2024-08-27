@@ -1,42 +1,51 @@
 pipeline {
     agent any
     environment {
-        DIRECTORY_PATH = 'C:\\Users\\danie\\OneDrive\\Documents\\UNI\\SIT223 - Professional Practice\\Jenkins'
-        TESTING_ENVIRONMENT = 'Pipeline test'
-        PRODUCTION_ENVIRONMENT = 'Daniel Mattioli'
+        DIRECTORY_PATH = 'C:\\Users\\danie\\OneDrive\\Documents\\UNI\\SIT223 - Professional Practice\\Jenkins'  // Corrected path
+        TESTING_ENVIRONMENT = 'Pipeline test'  // Testing environment name
+        PRODUCTION_ENVIRONMENT = 'Daniel Mattioli'  // Your name
     }
     stages {
         stage('Build') {
             steps {
-                echo "Build started and completed!"
-                echo "Directory Path: ${env.DIRECTORY_PATH}"
-                bat 'java -version'
+                echo "Build the code using a build automation tool (e.g., Maven) to compile and package the code."
+                echo "Tool used: Maven"
             }
         }
-        stage('Test') {
+        stage('Unit and Integration Tests') {
             steps {
-                echo "Test started and completed!"
-                echo "Testing in: ${env.TESTING_ENVIRONMENT}"
+                echo "Run unit tests to ensure the code functions as expected."
+                echo "Run integration tests to ensure different components of the application work together as expected."
+                echo "Test automation tools: JUnit, TestNG"
             }
         }
-        stage('Code Quality Check') {
+        stage('Code Analysis') {
             steps {
-                echo "Code Quality Check started and completed!"
+                echo "Integrate a code analysis tool to analyze the code and ensure it meets industry standards."
+                echo "Tool used: SonarQube"
             }
         }
-        stage('Deploy') {
+        stage('Security Scan') {
             steps {
-                echo "Deployment started and completed!"
+                echo "Perform a security scan on the code using a tool to identify any vulnerabilities."
+                echo "Tool used: OWASP ZAP"
             }
         }
-        stage('Approval') {
+        stage('Deploy to Staging') {
             steps {
-                echo "Approval process started and completed!"
+                echo "Deploy the application to a staging server (e.g., AWS EC2 instance)."
+            }
+        }
+        stage('Integration Tests on Staging') {
+            steps {
+                echo "Run integration tests on the staging environment to ensure the application functions as expected in a production-like environment."
+                echo "Tool used: Selenium"
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo "sending to Production: ${env.PRODUCTION_ENVIRONMENT}"
+                echo "Deploy the application to a production server (e.g., AWS EC2 instance)."
+                echo "Deployment environment: ${env.PRODUCTION_ENVIRONMENT}"
             }
         }
     }
