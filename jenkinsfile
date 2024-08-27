@@ -1,9 +1,9 @@
 pipeline {
     agent any
     environment {
-        DIRECTORY_PATH = 'C:\\Users\\danie\\OneDrive\\Documents\\UNI\\SIT223 - Professional Practice\\Jenkins'  // Corrected path
-        TESTING_ENVIRONMENT = 'Pipeline test'  // Testing environment name
-        PRODUCTION_ENVIRONMENT = 'Daniel Mattioli'  // Your name
+        DIRECTORY_PATH = 'C:\\Users\\danie\\OneDrive\\Documents\\UNI\\SIT223 - Professional Practice\\Jenkins'
+        TESTING_ENVIRONMENT = 'Pipeline test'
+        PRODUCTION_ENVIRONMENT = 'Daniel Mattioli'
     }
     stages {
         stage('Build') {
@@ -18,6 +18,20 @@ pipeline {
                 echo "Run integration tests to ensure different components of the application work together as expected."
                 echo "Test automation tools: JUnit, TestNG"
             }
+            post {
+                success {
+                    emailext to: 'danielmattioli2005@gmail.com',
+                        subject: "Unit and Integration Tests Successful",
+                        body: "The unit and integration tests were successful.",
+                        attachLog: true
+                }
+                failure {
+                    emailext to: 'danielmattioli2005@gmail.com',
+                        subject: "Unit and Integration Tests Failed",
+                        body: "The unit and integration tests failed. Please check the attached logs for details.",
+                        attachLog: true
+                }
+            }
         }
         stage('Code Analysis') {
             steps {
@@ -29,6 +43,20 @@ pipeline {
             steps {
                 echo "Perform a security scan on the code using a tool to identify any vulnerabilities."
                 echo "Tool used: OWASP ZAP"
+            }
+            post {
+                success {
+                    emailext to: 'danielmattioli2005@gmail.com',
+                        subject: "Security Scan Successful",
+                        body: "The security scan was successful.",
+                        attachLog: true
+                }
+                failure {
+                    emailext to: 'danielmattioli2005@gmail.com',
+                        subject: "Security Scan Failed",
+                        body: "The security scan failed. Please check the attached logs for details.",
+                        attachLog: true
+                }
             }
         }
         stage('Deploy to Staging') {
