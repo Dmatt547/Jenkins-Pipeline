@@ -20,20 +20,14 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
-                        to: "danielmattioli2005@gmail.com",
+                    mail to: "danielmattioli2005@gmail.com",
                         subject: "Unit and Integration Tests Successful",
-                        body: "The unit and integration tests were successful. Please find the logs attached.",
-                        attachLog: true
-                    )
+                        body: "The unit and integration tests were successful. Please check the Jenkins console for more details."
                 }
                 failure {
-                    emailext(
-                        to: "danielmattioli2005@gmail.com",
+                    mail to: "danielmattioli2005@gmail.com",
                         subject: "Unit and Integration Tests Failed",
-                        body: "The unit and integration tests failed. Please check the attached logs for details.",
-                        attachLog: true
-                    )
+                        body: "The unit and integration tests failed. Please check the Jenkins console for more details."
                 }
             }
         }
@@ -50,20 +44,14 @@ pipeline {
             }
             post {
                 success {
-                    emailext(
-                        to: "danielmattioli2005@gmail.com",
+                    mail to: "danielmattioli2005@gmail.com",
                         subject: "Security Scan Successful",
-                        body: "The security scan was successful. Please find the logs attached.",
-                        attachLog: true
-                    )
+                        body: "The security scan was successful. Please check the Jenkins console for more details."
                 }
                 failure {
-                    emailext(
-                        to: "danielmattioli2005@gmail.com",
+                    mail to: "danielmattioli2005@gmail.com",
                         subject: "Security Scan Failed",
-                        body: "The security scan failed. Please check the attached logs for details.",
-                        attachLog: true
-                    )
+                        body: "The security scan failed. Please check the Jenkins console for more details."
                 }
             }
         }
